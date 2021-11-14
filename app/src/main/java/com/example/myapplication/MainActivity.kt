@@ -18,7 +18,7 @@ class MainActivity() : AppCompatActivity(){
         setContentView(binding.root)
 
         binding.loginButton.setOnClickListener{
-            startActivity(Intent(this, IngredientsActivity::class.java))
+            startActivity(Intent(this, ToolbarActivity::class.java))
         }
     }
 }
