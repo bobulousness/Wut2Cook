@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.myapplication.databinding.RecipefragmentBinding
+import com.example.myapplication.databinding.PantryfragmentBinding
 
-class RecipeFragment : Fragment(R.layout.recipefragment) {
+class PantryFragment: Fragment(R.layout.pantryfragment) {
 
-    private var _binding: RecipefragmentBinding? = null
+    private var _binding: PantryfragmentBinding? = null
 
     private val binding get() = _binding!!
 
@@ -18,18 +18,13 @@ class RecipeFragment : Fragment(R.layout.recipefragment) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState:Bundle?
     ): View? {
-
-        _binding = RecipefragmentBinding.inflate(inflater, container, false)
+        _binding = PantryfragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
-       super.onViewCreated(view, savedInstanceState)
-        binding.RecipeRecyclerView.apply{
-            layoutManager = LinearLayoutManager(activity)
-            adapter = RecipeAdapter()
-        }
-   }
+        super.onViewCreated(view, savedInstanceState)
+    }
 
     override fun onDestroyView(){
         super.onDestroyView()
