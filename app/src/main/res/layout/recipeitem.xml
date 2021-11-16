@@ -12,7 +12,6 @@
         android:layout_width="409dp"
         android:layout_height="154dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo2" />
@@ -33,5 +32,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recipeimage"
         tools:text="super fun salad Recipe" />
+
+    <ToggleButton
+        android:id="@+id/toggleFavoriteButton"
+        android:layout_width="61dp"
+        android:layout_height="37dp"
+        android:checked="false"
+        android:text="ToggleButton"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textOff=":("
+        android:textOn=":)"
+        app:layout_constraintBottom_toTopOf="@+id/recipetitle"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
