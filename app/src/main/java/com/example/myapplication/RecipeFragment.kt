@@ -29,6 +29,11 @@ class RecipeFragment : Fragment(R.layout.recipefragment) {
             layoutManager = LinearLayoutManager(activity)
             adapter = RecipeAdapter()
         }
+
+        binding.FilterRecyclerView.apply{
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+            adapter = FilterAdapter()
+        }
    }
 
     override fun onDestroyView(){
