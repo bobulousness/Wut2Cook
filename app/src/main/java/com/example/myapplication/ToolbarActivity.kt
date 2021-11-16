@@ -28,9 +28,18 @@ class ToolbarActivity : AppCompatActivity() {
         }
 
         //sets the search button on the toolbar to switch the fragment view (MainFragmentView) to the recipe fragment
-        binding.toolbarSearchButton.setOnClickListener{
+        binding.ToolbarSearchButton.setOnClickListener{
             val transaction = manager.beginTransaction()
             val fragment = RecipeFragment()
+            transaction.replace(R.id.MainFragmentView, fragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+
+        //sets the favorites button to switch the fragment view to the favorites fragment
+        binding.ToolbarFavoritesButton.setOnClickListener{
+            val transaction = manager.beginTransaction()
+            val fragment = FavoritesFragment()
             transaction.replace(R.id.MainFragmentView, fragment)
             transaction.addToBackStack(null)
             transaction.commit()
