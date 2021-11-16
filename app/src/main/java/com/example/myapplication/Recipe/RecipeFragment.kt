@@ -41,7 +41,7 @@ class RecipeFragment : Fragment(R.layout.recipefragment) {
 
         binding.FilterRecyclerView.apply{
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-            adapter = FilterAdapter()
+            adapter = FilterAdapter(generateFilterList(12))
         }
    }
 
@@ -68,5 +68,20 @@ class RecipeFragment : Fragment(R.layout.recipefragment) {
 
         return list
 
+    }
+
+    //function for generating filter data
+    private fun generateFilterList(size: Int): List<Filterdata>{
+        var list = ArrayList<Filterdata>()
+
+        val filter1 = Filterdata("Meal type")
+        val filter2 = Filterdata("Diet")
+        val filter3 = Filterdata("Main Ingredient")
+
+        list += filter1
+        list += filter2
+        list += filter3
+
+        return list
     }
 }

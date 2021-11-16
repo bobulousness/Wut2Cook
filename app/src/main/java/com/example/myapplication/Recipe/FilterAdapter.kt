@@ -3,14 +3,15 @@ package com.example.myapplication.Recipe
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 
 //this is the adapter for the horizontal filter recycler view
-class FilterAdapter : RecyclerView.Adapter<FilterAdapter.ViewHolder>() {
+class FilterAdapter(private val filterList: List<Filterdata>) : RecyclerView.Adapter<FilterAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-
+        val titleView: Button = view.findViewById(R.id.FilterButton)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -20,8 +21,10 @@ class FilterAdapter : RecyclerView.Adapter<FilterAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val currentItem = filterList[position]
+        holder.titleView.text = currentItem.title
     }
 
-    override fun getItemCount() =4
+    override fun getItemCount() = filterList.size
 
 }
