@@ -21,7 +21,7 @@
         </activity>
 
 
-        <activity android:name=".PantryFragment" />
+        <activity android:name=".pantry.PantryFragment" />
         <activity android:name=".LoginPageActivity" />
         <activity android:name=".ToolbarActivity"/>
     </application>

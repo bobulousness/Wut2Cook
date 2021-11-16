@@ -9,7 +9,7 @@ class MainActivity() : AppCompatActivity(){
 
     private lateinit var binding: LoginBinding
 
-
+    //starts the program then loads up the login page
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -17,6 +17,7 @@ class MainActivity() : AppCompatActivity(){
         binding = LoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //sets login button to open the toolbar activity when clicked
         binding.loginButton.setOnClickListener{
             startActivity(Intent(this, ToolbarActivity::class.java))
         }

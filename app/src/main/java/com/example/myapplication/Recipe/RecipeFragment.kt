@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.Recipe
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapplication.R
 import com.example.myapplication.databinding.RecipefragmentBinding
 
+
+//this is the fragment with the filters and recipes and search bar on it
 class RecipeFragment : Fragment(R.layout.recipefragment) {
 
     private var _binding: RecipefragmentBinding? = null
@@ -23,11 +26,17 @@ class RecipeFragment : Fragment(R.layout.recipefragment) {
         return binding.root
     }
 
+    //after view is created, this function fills in the recipe and filter recycler views
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
        super.onViewCreated(view, savedInstanceState)
+
+        //uses function (at bottom of file) to generate list data with size 12
+        val recipelist = generateRecipeList(12)
+
         binding.RecipeRecyclerView.apply{
             layoutManager = LinearLayoutManager(activity)
-            adapter = RecipeAdapter()
+            //assigner the adapter and the list that fills in the data
+            adapter = RecipeAdapter(recipelist)
         }
 
         binding.FilterRecyclerView.apply{
@@ -39,5 +48,25 @@ class RecipeFragment : Fragment(R.layout.recipefragment) {
     override fun onDestroyView(){
         super.onDestroyView()
         _binding=null
+    }
+
+    //function for generating the data that goes into the recipe
+    private fun generateRecipeList(size: Int): List<recipedata>{
+        val list = ArrayList<recipedata>()
+
+        for (i in 0 until size) {
+            val title = when (i % 3){
+                0-> "generated title 1"
+                1-> "generated title 2"
+                else -> "generated title 3"
+            }
+
+            //insert the image first, then the title
+            val item = recipedata(R.drawable.logo2, title)
+            list += item
+        }
+
+        return list
+
     }
 }

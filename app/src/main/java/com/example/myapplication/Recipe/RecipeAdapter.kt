@@ -1,0 +1,34 @@
+package com.example.myapplication.Recipe
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.R
+
+
+//this is the adapter for the vertical recipe recycler view
+class RecipeAdapter(private val recipeList: List<recipedata>) : RecyclerView.Adapter<RecipeAdapter.ViewHolder>() {
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val imageView: ImageView = view.findViewById(R.id.recipeimage)
+        val titleView: TextView = view.findViewById(R.id.recipetitle)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.recipeitem, parent, false)
+        return ViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val currentItem = recipeList[position]
+
+        holder.imageView.setImageResource(currentItem.imageResource)
+        holder.titleView.text = currentItem.title
+    }
+
+    override fun getItemCount() = recipeList.size
+
+}
