@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.PantryfragmentBinding
+import java.io.BufferedReader
+import java.io.File
+import java.io.InputStream
 
 //this fragment hosts the page where users input ingredients
 class PantryFragment : Fragment(R.layout.pantryfragment) {
@@ -19,10 +22,16 @@ class PantryFragment : Fragment(R.layout.pantryfragment) {
 
     private val binding get() = _binding!!
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
+
+
         _binding = PantryfragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -40,16 +49,15 @@ class PantryFragment : Fragment(R.layout.pantryfragment) {
 
     private fun generatePantryList(size: Int): List<Pantrydata> {
 
-        val list = ArrayList<Pantrydata>()
+         val inputStream: BufferedReader = requireActivity().assets.open("ingredients.txt").bufferedReader()
+         val lineList = mutableListOf<String>()
+         val list = ArrayList<Pantrydata>()
 
-        for (i in 0 until 8) {
-            val title = when (i % 3) {
-                0 -> Pantrydata("generated title 1")
-                1 -> Pantrydata("title 2")
-                else -> Pantrydata("gen title 3")
-            }
-            list += title
+        inputStream.useLines { lines -> lines.forEach { lineList.add(it)} }
+        lineList.forEach{
+            list += Pantrydata(it)
         }
+
         return list
     }
 
