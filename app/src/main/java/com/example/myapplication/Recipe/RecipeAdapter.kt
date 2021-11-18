@@ -10,16 +10,29 @@ import com.example.myapplication.R
 
 
 //this is the adapter for the vertical recipe recycler view
-class RecipeAdapter(private val recipeList: List<recipedata>) : RecyclerView.Adapter<RecipeAdapter.ViewHolder>() {
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class RecipeAdapter(private val recipeList: List<recipedata>, private val onItemClicked: (position: Int) -> Unit) : RecyclerView.Adapter<RecipeAdapter.ViewHolder>() {
+    class ViewHolder(
+        view: View,
+        private val onItemClicked: (position: Int) -> Unit
+    ) : RecyclerView.ViewHolder(view), View.OnClickListener {
         val imageView: ImageView = view.findViewById(R.id.recipeimage)
         val titleView: TextView = view.findViewById(R.id.recipetitle)
+
+        init {
+            view.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View) {
+            val position = adapterPosition
+            onItemClicked(position)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.recipeitem, parent, false)
-        return ViewHolder(view)
+
+        return ViewHolder(view, onItemClicked)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -28,6 +41,8 @@ class RecipeAdapter(private val recipeList: List<recipedata>) : RecyclerView.Ada
         holder.imageView.setImageResource(currentItem.imageResource)
         holder.titleView.text = currentItem.title
     }
+
+
 
     override fun getItemCount() = recipeList.size
 

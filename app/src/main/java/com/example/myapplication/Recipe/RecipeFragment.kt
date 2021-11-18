@@ -1,12 +1,15 @@
 package com.example.myapplication.Recipe
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapplication.IndividualActivity
 import com.example.myapplication.R
+import com.example.myapplication.ToolbarActivity
 import com.example.myapplication.databinding.RecipefragmentBinding
 
 
@@ -19,45 +22,44 @@ class RecipeFragment : Fragment(R.layout.recipefragment) {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState:Bundle?
+        savedInstanceState: Bundle?
     ): View? {
-
         _binding = RecipefragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     //after view is created, this function fills in the recipe and filter recycler views
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?){
-       super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         //uses function (at bottom of file) to generate list data with size 12
         val recipelist = generateRecipeList(12)
 
-        binding.RecipeRecyclerView.apply{
+        binding.RecipeRecyclerView.apply {
             layoutManager = LinearLayoutManager(activity)
             //assigner the adapter and the list that fills in the data
-            adapter = RecipeAdapter(recipelist)
+            adapter = RecipeAdapter(recipelist){ position -> onRecipeItemClick(position)}
         }
 
-        binding.FilterRecyclerView.apply{
+        binding.FilterRecyclerView.apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
             adapter = FilterAdapter(generateFilterList(12))
         }
-   }
+    }
 
-    override fun onDestroyView(){
+    override fun onDestroyView() {
         super.onDestroyView()
-        _binding=null
+        _binding = null
     }
 
     //function for generating the data that goes into the recipe
-    private fun generateRecipeList(size: Int): List<recipedata>{
+    private fun generateRecipeList(size: Int): List<recipedata> {
         val list = ArrayList<recipedata>()
 
         for (i in 0 until size) {
-            val title = when (i % 3){
-                0-> "generated title 1"
-                1-> "generated title 2"
+            val title = when (i % 3) {
+                0 -> "generated title 1"
+                1 -> "generated title 2"
                 else -> "generated title 3"
             }
 
@@ -71,7 +73,7 @@ class RecipeFragment : Fragment(R.layout.recipefragment) {
     }
 
     //function for generating filter data
-    private fun generateFilterList(size: Int): List<Filterdata>{
+    private fun generateFilterList(size: Int): List<Filterdata> {
         var list = ArrayList<Filterdata>()
 
         val filter1 = Filterdata("Meal type")
@@ -83,5 +85,9 @@ class RecipeFragment : Fragment(R.layout.recipefragment) {
         list += filter3
 
         return list
+    }
+
+    private fun onRecipeItemClick(position: Int) {
+        startActivity(Intent(activity, IndividualActivity::class.java))
     }
 }

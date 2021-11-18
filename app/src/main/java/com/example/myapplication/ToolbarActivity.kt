@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.Recipe.RecipeFragment
 import com.example.myapplication.databinding.MainviewBinding
-import com.example.myapplication.pantry.PantryFragment
+import com.example.myapplication.Pantry.PantryFragment
 
 class ToolbarActivity : AppCompatActivity() {
 

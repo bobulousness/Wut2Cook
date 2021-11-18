@@ -11,6 +11,7 @@
         android:id="@+id/recipeimage"
         android:layout_width="409dp"
         android:layout_height="154dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -36,13 +37,36 @@
     <ToggleButton
         android:id="@+id/toggleFavoriteButton"
         android:layout_width="61dp"
-        android:layout_height="37dp"
+        android:layout_height="48dp"
         android:checked="false"
         android:text="ToggleButton"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textOff=":("
         android:textOn=":)"
         app:layout_constraintBottom_toTopOf="@+id/recipetitle"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="8dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipetitle"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="6dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/recipeimage"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

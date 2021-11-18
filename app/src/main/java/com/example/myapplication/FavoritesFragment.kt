@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.Recipe.RecipeAdapter
 import com.example.myapplication.Recipe.recipedata
 import com.example.myapplication.databinding.FavoritesfragmentBinding
-import com.example.myapplication.databinding.RecipefragmentBinding
 
 class FavoritesFragment : Fragment(R.layout.favoritesfragment) {
 
@@ -37,7 +37,7 @@ class FavoritesFragment : Fragment(R.layout.favoritesfragment) {
         binding.FavoritesRecyclerView.apply {
             layoutManager = LinearLayoutManager(activity)
             //assigner the adapter and the list that fills in the data
-            adapter = RecipeAdapter(recipelist)
+            adapter = RecipeAdapter(recipelist){ position -> onRecipeItemClick(position)}
         }
 
     }
@@ -65,5 +65,9 @@ class FavoritesFragment : Fragment(R.layout.favoritesfragment) {
 
         return list
 
+    }
+
+    private fun onRecipeItemClick(position: Int) {
+        startActivity(Intent(activity, IndividualActivity::class.java))
     }
 }
