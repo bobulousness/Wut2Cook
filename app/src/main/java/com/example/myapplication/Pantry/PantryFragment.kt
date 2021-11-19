@@ -49,16 +49,36 @@ class PantryFragment : Fragment(R.layout.pantryfragment) {
 
     private fun generatePantryList(size: Int): List<Pantrydata> {
 
-         val inputStream: BufferedReader = requireActivity().assets.open("ingredients.txt").bufferedReader()
-         val lineList = mutableListOf<String>()
-         val list = ArrayList<Pantrydata>()
+        val inputStream: BufferedReader = requireActivity().assets.open("ingredients.txt").bufferedReader()
+        val lineList = mutableListOf<String>()
+
+        var set = false
+        val meatList = ArrayList<Pantrydata>()
+        /*val grainsList = ArrayList<Pantrydata>()
+        val seaList = ArrayList<Pantrydata>()
+        val dairyList = ArrayList<Pantrydata>()
+        val vegList = ArrayList<Pantrydata>()
+        val fruitList = ArrayList<Pantrydata>()
+        val beansList = ArrayList<Pantrydata>()
+        val condimentsList = ArrayList<Pantrydata>()
+        val bakeList = ArrayList<Pantrydata>()
+        val herbsList = ArrayList<Pantrydata>()
+        val otherList = ArrayList<Pantrydata>()*/
+
 
         inputStream.useLines { lines -> lines.forEach { lineList.add(it)} }
         lineList.forEach{
-            list += Pantrydata(it)
+            /*if(it == "-"){
+                set = true
+            }
+            if (set == true){
+                if (it == "meat")
+            }*/
+
+            meatList += Pantrydata(it)
         }
 
-        return list
+        return meatList
     }
 
     override fun onDestroyView() {
