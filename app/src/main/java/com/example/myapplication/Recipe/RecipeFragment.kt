@@ -48,7 +48,7 @@ class RecipeFragment : Fragment(R.layout.recipefragment) {
 
         binding.FilterRecyclerView.apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-            adapter = FilterAdapter(generateFilterList(3), filterArray){ position, list -> onFilterItemClick(position, filterArray!![0] )}
+            adapter = FilterAdapter(generateFilterList(3), filterArray){ position, list, name -> onFilterItemClick(position, list, name )}
         }
     }
 
@@ -105,16 +105,19 @@ class RecipeFragment : Fragment(R.layout.recipefragment) {
         var filterList: Array<Array<String>> = emptyArray()
         var filter: MutableList<String> = mutableListOf()
 
-        val inputStream: BufferedReader = requireActivity().assets.open("time.txt").bufferedReader()
-        val lineList = mutableListOf<String>()
+
 
         var set = true
 
         val filenames = arrayOf("difficulty.txt","mealtype.txt","rating.txt","time.txt")
 
         for(i in filenames){
+            println(i)
             filterList += textToArray(i)
         }
+
+        val inputStream: BufferedReader = requireActivity().assets.open("ingredients.txt").bufferedReader()
+        val lineList = mutableListOf<String>()
 
         inputStream.useLines { lines -> lines.forEach { lineList.add(it)} }
         lineList.forEach{
@@ -134,6 +137,7 @@ class RecipeFragment : Fragment(R.layout.recipefragment) {
     }
 
     private fun textToArray(fileName: String): Array<String>{
+        println(fileName)
         val inputStream: BufferedReader = requireActivity().assets.open(fileName).bufferedReader()
         val lineList = mutableListOf<String>()
 
@@ -150,7 +154,7 @@ class RecipeFragment : Fragment(R.layout.recipefragment) {
         startActivity(Intent(activity, IndividualActivity::class.java))
     }
 
-    private fun onFilterItemClick(position: Int, content: Array<String>) {
-        FilterDialogsFragment(content).show(childFragmentManager, "neato")
+    private fun onFilterItemClick(position: Int, content: Array<String>, name: String) {
+        FilterDialogsFragment(content, name).show(childFragmentManager, "neato")
     }
 }

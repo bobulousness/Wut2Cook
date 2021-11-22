@@ -14,13 +14,13 @@ import com.example.myapplication.R
 class FilterAdapter(
     private val filterList: List<Filterdata>,
     private val filterListData: Array<Array<String>>,
-    private val onItemClicked: (position: Int, list:Array<String>) -> Unit
+    private val onItemClicked: (position: Int, list:Array<String>, name :String) -> Unit
 ) : RecyclerView.Adapter<FilterAdapter.ViewHolder>() {
 
     class ViewHolder(
         view: View,
         private val filterListData: Array<Array<String>>,
-        private val onItemClicked: (position:Int, Array<String>) -> Unit
+        private val onItemClicked: (position:Int, Array<String>, name:String) -> Unit
     ) : RecyclerView.ViewHolder(view), View.OnClickListener {
         val cardView: CardView = view.findViewById(R.id.FitBit)
         val textView: TextView = view.findViewById(R.id.FilterTextView)
@@ -31,16 +31,16 @@ class FilterAdapter(
 
         override fun onClick(v:View){
             val position = adapterPosition
-            var list: Array<String> = emptyArray()
+            var name: String = textView.text.toString()
 
-            list = when (textView.text){
+            var list: Array<String> = when (textView.text){
                 "Difficulty" -> filterListData[0]
                 "Meal Type"  -> filterListData[1]
                 "Rating" -> filterListData[2]
                 "Time" -> filterListData[3]
                 else -> filterListData[4]
             }
-            onItemClicked(position, list)
+            onItemClicked(position, list, name)
         }
     }
 
