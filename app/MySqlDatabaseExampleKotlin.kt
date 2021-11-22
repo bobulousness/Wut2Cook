@@ -79,10 +79,7 @@ object MySQLDatabaseExampleKotlin {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance()
             conn = DriverManager.getConnection(
-                "jdbc:" + "mysql" + "://" +
-                        "127.0.0.1" +
-                        ":" + "3306" + "/" +
-                        "",
+                "connectionString=\"server=localhost;port=3306;database=Wut2CookRecipes;uid=cook;password=Cooking@123\"",
                 connectionProps)
         } catch (ex: SQLException) {
             // handle any errors
