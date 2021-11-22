@@ -4,16 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ExpandableListAdapter
-import android.widget.ExpandableListView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.PantryfragmentBinding
 import java.io.BufferedReader
-import java.io.File
-import java.io.InputStream
 
 //this fragment hosts the page where users input ingredients
 class PantryFragment : Fragment(R.layout.pantryfragment) {
@@ -54,16 +49,6 @@ class PantryFragment : Fragment(R.layout.pantryfragment) {
 
         var set = false
         val meatList = ArrayList<Pantrydata>()
-        /*val grainsList = ArrayList<Pantrydata>()
-        val seaList = ArrayList<Pantrydata>()
-        val dairyList = ArrayList<Pantrydata>()
-        val vegList = ArrayList<Pantrydata>()
-        val fruitList = ArrayList<Pantrydata>()
-        val beansList = ArrayList<Pantrydata>()
-        val condimentsList = ArrayList<Pantrydata>()
-        val bakeList = ArrayList<Pantrydata>()
-        val herbsList = ArrayList<Pantrydata>()
-        val otherList = ArrayList<Pantrydata>()*/
 
 
         inputStream.useLines { lines -> lines.forEach { lineList.add(it)} }
@@ -75,7 +60,7 @@ class PantryFragment : Fragment(R.layout.pantryfragment) {
                 if (it == "meat")
             }*/
 
-            meatList += Pantrydata(it)
+            meatList += Pantrydata(it,false)
         }
 
         return meatList

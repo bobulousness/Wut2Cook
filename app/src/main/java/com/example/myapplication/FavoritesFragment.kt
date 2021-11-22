@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.Recipe.RecipeAdapter
-import com.example.myapplication.Recipe.recipedata
+import com.example.myapplication.Recipe.Recipedata
 import com.example.myapplication.databinding.FavoritesfragmentBinding
 
 class FavoritesFragment : Fragment(R.layout.favoritesfragment) {
@@ -32,7 +32,7 @@ class FavoritesFragment : Fragment(R.layout.favoritesfragment) {
         super.onViewCreated(view, savedInstanceState)
 
         //uses function (at bottom of file) to generate list data with size 12
-        val recipelist = generateRecipeList(4)
+        val recipelist = generateRecipeList(1)
 
         binding.FavoritesRecyclerView.apply {
             layoutManager = LinearLayoutManager(activity)
@@ -48,18 +48,14 @@ class FavoritesFragment : Fragment(R.layout.favoritesfragment) {
     }
 
     //function for generating the data that goes into the recipe
-    private fun generateRecipeList(size: Int): List<recipedata> {
-        val list = ArrayList<recipedata>()
+    private fun generateRecipeList(size: Int): List<Recipedata> {
+        val list = ArrayList<Recipedata>()
 
         for (i in 0 until size) {
-            val title = when (i % 3) {
-                0 -> "generated title 1"
-                1 -> "generated title 2"
-                else -> "generated title 3"
-            }
+            val title = "carnitas"
 
             //insert the image first, then the title
-            val item = recipedata(R.drawable.logo2, title)
+            val item = Recipedata(R.drawable.carnitas, title)
             list += item
         }
 

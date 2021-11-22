@@ -5,12 +5,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 
 
 //this is the adapter for the vertical recipe recycler view
-class RecipeAdapter(private val recipeList: List<recipedata>, private val onItemClicked: (position: Int) -> Unit) : RecyclerView.Adapter<RecipeAdapter.ViewHolder>() {
+class RecipeAdapter(
+    private val recipeList: List<Recipedata>,
+    private val onItemClicked: (position: Int) -> Unit) : RecyclerView.Adapter<RecipeAdapter.ViewHolder>()
+{
     class ViewHolder(
         view: View,
         private val onItemClicked: (position: Int) -> Unit
@@ -41,8 +45,6 @@ class RecipeAdapter(private val recipeList: List<recipedata>, private val onItem
         holder.imageView.setImageResource(currentItem.imageResource)
         holder.titleView.text = currentItem.title
     }
-
-
 
     override fun getItemCount() = recipeList.size
 

@@ -1,3 +1,4 @@
+-
 Meat
 Chicken
 Kielbasa
@@ -6,6 +7,7 @@ Eggs
 Beef
 Bacon
 Ham
+-
 Sea Food
 General Fish
 Salmon
@@ -14,6 +16,7 @@ Capers
 Sardine
 Shallots
 Tilapia
+-
 Grains and Pasta
 Noodles
 Corn Meal
@@ -23,6 +26,7 @@ Flour
 Quinoa
 Chia
 CousCous
+-
 Dairy and Dairy Substitutes
 Milk
 Cheese
@@ -31,6 +35,7 @@ Butter
 Sour Cream
 Coconut Milk
 Proscuitto
+-
 Vegetables
 Potatoes
 Beets
@@ -53,6 +58,7 @@ Adobo Chile
 Kale
 Ginger
 Green Onion
+-
 Fruits
 Lemon
 Lime
@@ -60,25 +66,31 @@ Mango
 Raisins
 Squash
 Cucumber
+-
 Beans and Legumes
 General Beans
 Lentils
 Peanut
 Chickpeas
+-
 Condiments
 Marinara Sauce
 Soy sauce
 Dijon Mustard
 Jalapenos
 Pesto
+-
 Baking
 Yeast
 Baking powder
+-
 Other
 Chocolate Chips
 Wine
+-
 Herbs and Spices
 Basil
 Parsley
 Red Onion
 Dill
+-
