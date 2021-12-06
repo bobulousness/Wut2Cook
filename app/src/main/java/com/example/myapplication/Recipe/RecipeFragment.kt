@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.IndividualActivity
@@ -14,7 +15,7 @@ import java.io.BufferedReader
 
 
 //this is the fragment with the filters and recipes and search bar on it
-class RecipeFragment : Fragment(R.layout.recipefragment) {
+class RecipeFragment : Fragment(R.layout.recipefragment), FilterDialogsFragment.FilterDialogListener {
 
     private var _binding: RecipefragmentBinding? = null
 
@@ -155,6 +156,18 @@ class RecipeFragment : Fragment(R.layout.recipefragment) {
     }
 
     private fun onFilterItemClick(position: Int, content: Array<String>, name: String) {
-        FilterDialogsFragment(content, name).show(childFragmentManager, "neato")
+        FilterDialogsFragment(content, name).show(childFragmentManager, "FilterDialogFragment")
     }
+
+    private val diffArray: Array<Int> = emptyArray()
+    private val timeArray: Array<Int> = emptyArray()
+    private val rateArray: Array<Int> = emptyArray()
+    private val ingreArray: Array<Int> = emptyArray()
+    private val typeArray: Array<Int> = emptyArray()
+
+
+    override fun onDialogPositiveClick(dialog: DialogFragment) {
+        TODO("Not yet implemented")
+    }
+
 }
