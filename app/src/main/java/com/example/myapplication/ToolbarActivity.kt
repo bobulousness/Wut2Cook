@@ -2,15 +2,15 @@ package com.example.myapplication
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.Recipe.RecipeFragment
+import com.example.myapplication.recipe.RecipeFragment
 import com.example.myapplication.databinding.MainviewBinding
-import com.example.myapplication.Pantry.PantryFragment
+import com.example.myapplication.pantry.PantryFragment
 
 class ToolbarActivity : AppCompatActivity() {
 
     private lateinit var binding: MainviewBinding
 
-    val manager = supportFragmentManager
+    private val manager = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

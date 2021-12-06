@@ -1,10 +1,8 @@
-package com.example.myapplication.Recipe
+package com.example.myapplication.recipe
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
@@ -14,13 +12,13 @@ import com.example.myapplication.R
 class FilterAdapter(
     private val filterList: List<Filterdata>,
     private val filterListData: Array<Array<String>>,
-    private val onItemClicked: (position: Int, list:Array<String>, name :String) -> Unit
+    private val onItemClicked: (list:Array<String>, name :String) -> Unit
 ) : RecyclerView.Adapter<FilterAdapter.ViewHolder>() {
 
     class ViewHolder(
         view: View,
         private val filterListData: Array<Array<String>>,
-        private val onItemClicked: (position:Int, Array<String>, name:String) -> Unit
+        private val onItemClicked: (Array<String>, name:String) -> Unit
     ) : RecyclerView.ViewHolder(view), View.OnClickListener {
         val cardView: CardView = view.findViewById(R.id.FitBit)
         val textView: TextView = view.findViewById(R.id.FilterTextView)
@@ -30,17 +28,16 @@ class FilterAdapter(
         }
 
         override fun onClick(v:View){
-            val position = adapterPosition
-            var name: String = textView.text.toString()
+            val name: String = textView.text.toString()
 
-            var list: Array<String> = when (textView.text){
+            val list: Array<String> = when (textView.text){
                 "Difficulty" -> filterListData[0]
                 "Meal Type"  -> filterListData[1]
                 "Rating" -> filterListData[2]
                 "Time" -> filterListData[3]
                 else -> filterListData[4]
             }
-            onItemClicked(position, list, name)
+            onItemClicked(list, name)
         }
     }
 

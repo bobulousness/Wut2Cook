@@ -1,4 +1,4 @@
-package com.example.myapplication.Pantry
+package com.example.myapplication.pantry
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,7 +22,7 @@ class PantryFragment : Fragment(R.layout.pantryfragment) {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
 
 
@@ -34,7 +34,7 @@ class PantryFragment : Fragment(R.layout.pantryfragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val list = generatePantryList(8)
+        val list = generatePantryList()
 
         binding.PantryRecyclerView.apply {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
@@ -42,7 +42,7 @@ class PantryFragment : Fragment(R.layout.pantryfragment) {
         }
     }
 
-    private fun generatePantryList(size: Int): List<Pantrydata> {
+    private fun generatePantryList(): List<Pantrydata> {
 
         val inputStream: BufferedReader = requireActivity().assets.open("ingredients.txt").bufferedReader()
         val lineList = mutableListOf<String>()

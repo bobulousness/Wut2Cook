@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.IndividualactivityBinding
 
-class IndividualActivity() : AppCompatActivity(){
+class IndividualActivity : AppCompatActivity(){
 
     private lateinit var binding: IndividualactivityBinding
 

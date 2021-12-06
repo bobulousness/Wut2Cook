@@ -1,4 +1,4 @@
-package com.example.myapplication.Recipe
+package com.example.myapplication.recipe
 
 import android.content.Intent
 import android.os.Bundle
@@ -26,7 +26,7 @@ class RecipeFragment : Fragment(R.layout.recipefragment), FilterDialogsFragment.
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = RecipefragmentBinding.inflate(inflater, container, false)
 
         return binding.root
@@ -44,12 +44,12 @@ class RecipeFragment : Fragment(R.layout.recipefragment), FilterDialogsFragment.
         binding.RecipeRecyclerView.apply {
             layoutManager = LinearLayoutManager(activity)
             //assigner the adapter and the list that fills in the data
-            adapter = RecipeAdapter(recipelist){ position -> onRecipeItemClick(position)}
+            adapter = RecipeAdapter(recipelist){onRecipeItemClick()}
         }
 
         binding.FilterRecyclerView.apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-            adapter = FilterAdapter(generateFilterList(3), filterArray){ position, list, name -> onFilterItemClick(position, list, name )}
+            adapter = FilterAdapter(generateFilterList(), filterArray){list, name -> onFilterItemClick(list, name )}
         }
     }
 
@@ -62,20 +62,20 @@ class RecipeFragment : Fragment(R.layout.recipefragment), FilterDialogsFragment.
     private fun generateRecipeList(size: Int): List<Recipedata> {
         val list = ArrayList<Recipedata>()
 
-        val title = "carnitas"
+        var title = "carnitas"
         val item = Recipedata(R.drawable.carnitas, title)
         list += item
 
         for (i in 0 until size) {
-            val title = when (i % 3) {
+            title = when (i % 3) {
                 0 -> "generated title 1"
                 1 -> "generated title 2"
                 else -> "generated title 3"
             }
 
             //insert the image first, then the title
-            val item = Recipedata(R.drawable.logo2, title)
-            list += item
+
+            list += Recipedata(R.drawable.logo2, title)
         }
 
         return list
@@ -83,8 +83,8 @@ class RecipeFragment : Fragment(R.layout.recipefragment), FilterDialogsFragment.
     }
 
     //function for generating filter data
-    private fun generateFilterList(size: Int): List<Filterdata> {
-        var list = ArrayList<Filterdata>()
+    private fun generateFilterList(): List<Filterdata> {
+        val list = ArrayList<Filterdata>()
 
         val filter1 = Filterdata("Main Ingredient")
         val filter2 = Filterdata("Meal Type")
@@ -104,7 +104,7 @@ class RecipeFragment : Fragment(R.layout.recipefragment), FilterDialogsFragment.
 
     private fun readFilterData(): Array<Array<String>>{
         var filterList: Array<Array<String>> = emptyArray()
-        var filter: MutableList<String> = mutableListOf()
+        val filter: MutableList<String> = mutableListOf()
 
 
 
@@ -151,11 +151,11 @@ class RecipeFragment : Fragment(R.layout.recipefragment), FilterDialogsFragment.
         return list
     }
 
-    private fun onRecipeItemClick(position: Int) {
+    private fun onRecipeItemClick() {
         startActivity(Intent(activity, IndividualActivity::class.java))
     }
 
-    private fun onFilterItemClick(position: Int, content: Array<String>, name: String) {
+    private fun onFilterItemClick(content: Array<String>, name: String) {
         FilterDialogsFragment(content, name).show(childFragmentManager, "FilterDialogFragment")
     }
 
