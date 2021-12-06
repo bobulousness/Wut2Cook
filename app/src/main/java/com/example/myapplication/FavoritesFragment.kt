@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.myapplication.recipe.RecipeAdapter
-import com.example.myapplication.recipe.Recipedata
+import com.example.myapplication.Recipe.RecipeAdapter
+import com.example.myapplication.Recipe.Recipedata
 import com.example.myapplication.databinding.FavoritesfragmentBinding
 
 class FavoritesFragment : Fragment(R.layout.favoritesfragment) {

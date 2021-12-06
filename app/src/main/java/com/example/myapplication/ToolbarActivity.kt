@@ -1,12 +1,16 @@
 package com.example.myapplication
 
 import android.os.Bundle
+import android.view.View
+import android.widget.CheckBox
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.recipe.RecipeFragment
+import androidx.fragment.app.DialogFragment
+import com.example.myapplication.Recipe.RecipeFragment
 import com.example.myapplication.databinding.MainviewBinding
-import com.example.myapplication.pantry.PantryFragment
+import com.example.myapplication.Pantry.PantryFragment
+import com.example.myapplication.Recipe.FilterDialogsFragment
 
-class ToolbarActivity : AppCompatActivity() {
+class ToolbarActivity : AppCompatActivity(), FilterDialogsFragment.FilterDialogListener {
 
     private lateinit var binding: MainviewBinding
 
@@ -44,6 +48,18 @@ class ToolbarActivity : AppCompatActivity() {
             transaction.addToBackStack(null)
             transaction.commit()
         }
+    }
+
+    override fun onDialogPositiveClick(
+        dialog: DialogFragment,
+        selectedItems: BooleanArray,
+        name: String
+    ) {
+        RecipeFragment().onDialogPositiveClick(selectedItems, name)
+    }
+
+    fun onPantryItemClick(view: View) {
+
     }
 }
 

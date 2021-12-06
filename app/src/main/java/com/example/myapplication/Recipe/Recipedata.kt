@@ -1,4 +1,4 @@
-package com.example.myapplication.recipe
+package com.example.myapplication.Recipe
 
 //this is a data class defining the model for a recipe data item, which are generated in
 // RecipeFragment and then fed into the RecipeAdapter

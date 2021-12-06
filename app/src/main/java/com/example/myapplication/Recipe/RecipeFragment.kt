@@ -1,11 +1,10 @@
-package com.example.myapplication.recipe
+package com.example.myapplication.Recipe
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.IndividualActivity
@@ -15,7 +14,7 @@ import java.io.BufferedReader
 
 
 //this is the fragment with the filters and recipes and search bar on it
-class RecipeFragment : Fragment(R.layout.recipefragment), FilterDialogsFragment.FilterDialogListener {
+class RecipeFragment : Fragment(R.layout.recipefragment){
 
     private var _binding: RecipefragmentBinding? = null
 
@@ -49,7 +48,7 @@ class RecipeFragment : Fragment(R.layout.recipefragment), FilterDialogsFragment.
 
         binding.FilterRecyclerView.apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-            adapter = FilterAdapter(generateFilterList(), filterArray){list, name -> onFilterItemClick(list, name )}
+            adapter = FilterAdapter(generateFilterList(), filterArray){list, name -> onFilterItemClick(list, name)}
         }
     }
 
@@ -109,11 +108,9 @@ class RecipeFragment : Fragment(R.layout.recipefragment), FilterDialogsFragment.
 
 
         var set = true
-
         val filenames = arrayOf("difficulty.txt","mealtype.txt","rating.txt","time.txt")
 
         for(i in filenames){
-            println(i)
             filterList += textToArray(i)
         }
 
@@ -138,7 +135,6 @@ class RecipeFragment : Fragment(R.layout.recipefragment), FilterDialogsFragment.
     }
 
     private fun textToArray(fileName: String): Array<String>{
-        println(fileName)
         val inputStream: BufferedReader = requireActivity().assets.open(fileName).bufferedReader()
         val lineList = mutableListOf<String>()
 
@@ -156,18 +152,34 @@ class RecipeFragment : Fragment(R.layout.recipefragment), FilterDialogsFragment.
     }
 
     private fun onFilterItemClick(content: Array<String>, name: String) {
-        FilterDialogsFragment(content, name).show(childFragmentManager, "FilterDialogFragment")
+        val list: BooleanArray = when(name){
+            "Difficulty" -> diffArray
+            "Meal Type"  -> typeArray
+            "Rating" -> rateArray
+            "Time" -> timeArray
+            else -> ingreArray
+        }
+        FilterDialogsFragment(content, name, list).show(childFragmentManager, "FilterDialogFragment")
     }
 
-    private val diffArray: Array<Int> = emptyArray()
-    private val timeArray: Array<Int> = emptyArray()
-    private val rateArray: Array<Int> = emptyArray()
-    private val ingreArray: Array<Int> = emptyArray()
-    private val typeArray: Array<Int> = emptyArray()
+    private var diffArray = BooleanArray(4)
+    private var timeArray = BooleanArray(4)
+    private var rateArray = BooleanArray(5)
+    private var ingreArray = BooleanArray(96)
+    private var typeArray = BooleanArray(7)
 
 
-    override fun onDialogPositiveClick(dialog: DialogFragment) {
-        TODO("Not yet implemented")
+    fun onDialogPositiveClick(selectedItems: BooleanArray, name: String) {
+        println("listener went to Fragment")
+        when(name){
+            "Difficulty" -> diffArray = selectedItems
+            "Meal Type"  -> typeArray = selectedItems
+            "Rating" -> rateArray = selectedItems
+            "Time" -> timeArray = selectedItems
+            else -> ingreArray = selectedItems
+        }
+
     }
+
 
 }

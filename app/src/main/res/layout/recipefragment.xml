@@ -36,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/RecipeSearchBar"
-        tools:listitem="@layout/filteritem"/>
+        tools:listitem="@layout/filterinneritem" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
