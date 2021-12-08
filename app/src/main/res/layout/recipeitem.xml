@@ -7,22 +7,11 @@
     android:layout_height="wrap_content"
     android:textAlignment="center">
 
-    <ToggleButton
-        android:id="@+id/toggleFavoriteButton3"
-        android:layout_width="61dp"
-        android:layout_height="48dp"
-        android:checked="false"
-        android:text="ToggleButton"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textOff=":("
-        android:textOn=":)"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="462dp" />
-
     <TextView
         android:id="@+id/recipetitle"
         android:layout_width="411dp"
         android:layout_height="34dp"
+        android:layout_marginTop="17dp"
         android:background="#982121"
         android:text="super fun salad recipe"
         android:textAlignment="center"
@@ -30,19 +19,28 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:typeface="serif"
-        tools:layout_editor_absoluteY="162dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipeimage"
         tools:text="Salad Recipe" />
 
     <ToggleButton
         android:id="@+id/toggleFavoriteButton"
         android:layout_width="61dp"
         android:layout_height="48dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="114dp"
         android:checked="false"
         android:text="ToggleButton"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textOff=":("
         android:textOn=":)"
-        tools:layout_editor_absoluteY="114dp" />
+        app:layout_constraintBottom_toTopOf="@+id/recipetitle"
+        app:layout_constraintEnd_toStartOf="@+id/recipeimage"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <View
         android:id="@+id/divider2"
@@ -53,39 +51,13 @@
         tools:layout_editor_absoluteY="1dp" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/recipeimage"
         android:layout_width="225dp"
         android:layout_height="145dp"
-        app:srcCompat="@drawable/salad"
-        tools:layout_editor_absoluteX="93dp"
-        tools:layout_editor_absoluteY="16dp" />
-
-    <TextView
-        android:id="@+id/recipetitle4"
-        android:layout_width="411dp"
-        android:layout_height="34dp"
-        android:background="#982121"
-        android:text="pizza recipe"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:typeface="serif"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="357dp"
-        tools:text="Pizza Recipe" />
-
-    <ToggleButton
-        android:id="@+id/toggleFavoriteButton2"
-        android:layout_width="61dp"
-        android:layout_height="48dp"
-        android:checked="false"
-        android:text="ToggleButton"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textOff=":("
-        android:textOn=":)"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="295dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/salad" />
 
     <View
         android:id="@+id/divider"
@@ -94,36 +66,5 @@
         android:background="?android:attr/listDivider"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="212dp"
-        android:layout_height="118dp"
-        app:srcCompat="@drawable/pepperoni_pizza"
-        tools:layout_editor_absoluteX="99dp"
-        tools:layout_editor_absoluteY="218dp" />
-
-    <TextView
-        android:id="@+id/recipetitle5"
-        android:layout_width="411dp"
-        android:layout_height="34dp"
-        android:background="#982121"
-        android:text="fries recipe"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:typeface="serif"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="518dp"
-        tools:text="Fries Recipe" />
-
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="120dp"
-        android:layout_height="166dp"
-        app:srcCompat="@drawable/fries"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="386dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

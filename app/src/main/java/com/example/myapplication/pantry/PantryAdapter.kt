@@ -1,4 +1,4 @@
-package com.example.myapplication.pantry
+package com.example.myapplication.Pantry
 
 import android.view.LayoutInflater
 import android.view.View

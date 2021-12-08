@@ -40,6 +40,8 @@ class RecipeFragment : Fragment(R.layout.recipefragment){
 
         val filterArray = readFilterData()
 
+        // binding the "recipeRecyclerView" from recipefragment.xml to the recipe adapter
+        // passing it the function to use for an on click event: "onRecipeItemClick"
         binding.RecipeRecyclerView.apply {
             layoutManager = LinearLayoutManager(activity)
             //assigner the adapter and the list that fills in the data
@@ -52,6 +54,7 @@ class RecipeFragment : Fragment(R.layout.recipefragment){
         }
     }
 
+    //what happens when the view is destroyed
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -81,7 +84,7 @@ class RecipeFragment : Fragment(R.layout.recipefragment){
 
     }
 
-    //function for generating filter data
+    //function for generating a list of the names for eahc filter
     private fun generateFilterList(): List<Filterdata> {
         val list = ArrayList<Filterdata>()
 
@@ -101,6 +104,7 @@ class RecipeFragment : Fragment(R.layout.recipefragment){
         return list
     }
 
+    //handles creating arrays for each set of filters
     private fun readFilterData(): Array<Array<String>>{
         var filterList: Array<Array<String>> = emptyArray()
         val filter: MutableList<String> = mutableListOf()
@@ -134,6 +138,7 @@ class RecipeFragment : Fragment(R.layout.recipefragment){
         return filterList
     }
 
+    //feeds lines of a text file into an array
     private fun textToArray(fileName: String): Array<String>{
         val inputStream: BufferedReader = requireActivity().assets.open(fileName).bufferedReader()
         val lineList = mutableListOf<String>()
@@ -147,10 +152,12 @@ class RecipeFragment : Fragment(R.layout.recipefragment){
         return list
     }
 
+    //function that handles when the recipe cards are clicked
     private fun onRecipeItemClick() {
         startActivity(Intent(activity, IndividualActivity::class.java))
     }
 
+    //function that stores which filter options have been selected
     private fun onFilterItemClick(content: Array<String>, name: String) {
         val list: BooleanArray = when(name){
             "Difficulty" -> diffArray
@@ -162,6 +169,8 @@ class RecipeFragment : Fragment(R.layout.recipefragment){
         FilterDialogsFragment(content, name, list).show(childFragmentManager, "FilterDialogFragment")
     }
 
+    //temp storage for the arrays that hold which filters have been checked
+    //todo: Replace with database
     private var diffArray = BooleanArray(4)
     private var timeArray = BooleanArray(4)
     private var rateArray = BooleanArray(5)
@@ -169,6 +178,7 @@ class RecipeFragment : Fragment(R.layout.recipefragment){
     private var typeArray = BooleanArray(7)
 
 
+    //runs when the positive button is clicked in the filter dialog fragment
     fun onDialogPositiveClick(selectedItems: BooleanArray, name: String) {
         println("listener went to Fragment")
         when(name){

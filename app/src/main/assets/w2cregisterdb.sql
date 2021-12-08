@@ -7,6 +7,16 @@ create table register (
     email varchar(255) not null
 );
 
+create table filters (
+    name varchar(255) not null,
+);
+
+create table register_filter(
+    name varchar(255) not null,
+    filter varchar(255) not null,
+
+);
+
 insert into register values('John Doe', 'cooky@123', 'male', 'johndoe@gmail.com');
 
 select *
