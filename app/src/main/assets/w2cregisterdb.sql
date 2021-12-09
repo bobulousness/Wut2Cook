@@ -23,3 +23,5 @@ insert into register values('John Doe', 'johndoe@gmail.com', 'cooky@123', 'male'
 select *
 from register;
 
+
+

@@ -16,6 +16,8 @@ class ToolbarActivity : AppCompatActivity(), FilterDialogsFragment.FilterDialogL
 
     private val manager = supportFragmentManager
 
+    private val dbh = DatabaseHelper(this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -52,10 +54,13 @@ class ToolbarActivity : AppCompatActivity(), FilterDialogsFragment.FilterDialogL
 
     override fun onDialogPositiveClick(
         dialog: DialogFragment,
-        selectedItems: BooleanArray,
+        selectedItems: Array<String>,
         name: String
     ) {
-        RecipeFragment().onDialogPositiveClick(selectedItems, name)
+        for (i in selectedItems){
+            println(i)
+        }
+        dbh.updateUserFilters(selectedItems, "Steve", name)
     }
 
     fun onPantryItemClick(view: View) {

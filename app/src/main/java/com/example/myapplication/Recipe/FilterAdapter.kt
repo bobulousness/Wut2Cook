@@ -10,15 +10,15 @@ import com.example.myapplication.R
 
 //this is the adapter for the horizontal filter recycler view
 class FilterAdapter(
-    private val filterList: List<Filterdata>,
-    private val filterListData: Array<Array<String>>,
-    private val onItemClicked: (list:Array<String>, name :String) -> Unit
+    private val filterList: List<String>,
+    private val filterListData: Array<Array<FilterItemdata>>,
+    private val onItemClicked: (list:Array<FilterItemdata>, name: String) -> Unit
 ) : RecyclerView.Adapter<FilterAdapter.ViewHolder>() {
 
     class ViewHolder(
         view: View,
-        private val filterListData: Array<Array<String>>,
-        private val onItemClicked: (Array<String>, name:String) -> Unit
+        private val filterListData: Array<Array<FilterItemdata>>,
+        private val onItemClicked: (Array<FilterItemdata>, name:String) -> Unit
     ) : RecyclerView.ViewHolder(view), View.OnClickListener {
         val cardView: CardView = view.findViewById(R.id.FitBit)
         val textView: TextView = view.findViewById(R.id.FilterTextView)
@@ -30,7 +30,7 @@ class FilterAdapter(
         override fun onClick(v:View){
             val name: String = textView.text.toString()
 
-            val list: Array<String> = when (textView.text){
+            val list: Array<FilterItemdata> = when (textView.text){
                 "Difficulty" -> filterListData[0]
                 "Meal Type"  -> filterListData[1]
                 "Rating" -> filterListData[2]
@@ -50,7 +50,7 @@ class FilterAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = filterList[position]
-        holder.textView.text = currentItem.title
+        holder.textView.text = currentItem
     }
 
     override fun getItemCount() = filterList.size

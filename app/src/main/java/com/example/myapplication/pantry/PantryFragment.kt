@@ -1,5 +1,6 @@
 package com.example.myapplication.Pantry
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,8 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.PantryfragmentBinding
 import java.io.BufferedReader
 import android.widget.CheckBox
+import com.example.myapplication.DatabaseHelper
+import com.example.myapplication.ToolbarActivity
 
 //this fragment hosts the page where users input ingredients
 class PantryFragment : Fragment(R.layout.pantryfragment) {
@@ -21,11 +24,15 @@ class PantryFragment : Fragment(R.layout.pantryfragment) {
     var pantryList: List<Pantrydata> = emptyList()
 
     var templist = List<Pantrydata>(96){ Pantrydata("",false) }
+    private lateinit var dbh: DatabaseHelper
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
 
 
         _binding = PantryfragmentBinding.inflate(inflater, container, false)
@@ -35,7 +42,9 @@ class PantryFragment : Fragment(R.layout.pantryfragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        pantryList = generatePantryList()
+        dbh = DatabaseHelper(requireActivity())
+
+        pantryList = dbh.getIngredients()
 
         binding.PantryRecyclerView.apply {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
@@ -62,6 +71,8 @@ class PantryFragment : Fragment(R.layout.pantryfragment) {
                 else -> {list += Pantrydata(it, templist[i].on);  i++}
             }
         }
+
+
 
         return list
     }

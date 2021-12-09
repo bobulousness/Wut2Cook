@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapplication.DatabaseHelper
 import com.example.myapplication.IndividualActivity
 import com.example.myapplication.R
 import com.example.myapplication.databinding.RecipefragmentBinding
@@ -19,8 +20,6 @@ class RecipeFragment : Fragment(R.layout.recipefragment){
     private var _binding: RecipefragmentBinding? = null
 
     private val binding get() = _binding!!
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,10 +34,16 @@ class RecipeFragment : Fragment(R.layout.recipefragment){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val dbh = DatabaseHelper(requireActivity())
+
         //uses function (at bottom of file) to generate list data with size 12
         val recipelist = generateRecipeList(12)
+        val filterTitle = generateFilterList()
+        var filterArray: Array<Array<FilterItemdata>> = emptyArray()
 
-        val filterArray = readFilterData()
+        for (i in filterTitle){
+            filterArray += dbh.getFilters(i)
+        }
 
         // binding the "recipeRecyclerView" from recipefragment.xml to the recipe adapter
         // passing it the function to use for an on click event: "onRecipeItemClick"
@@ -50,7 +55,7 @@ class RecipeFragment : Fragment(R.layout.recipefragment){
 
         binding.FilterRecyclerView.apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-            adapter = FilterAdapter(generateFilterList(), filterArray){list, name -> onFilterItemClick(list, name)}
+            adapter = FilterAdapter(filterTitle, filterArray){list, name -> onFilterItemClick(list, name)}
         }
     }
 
@@ -85,21 +90,14 @@ class RecipeFragment : Fragment(R.layout.recipefragment){
     }
 
     //function for generating a list of the names for eahc filter
-    private fun generateFilterList(): List<Filterdata> {
-        val list = ArrayList<Filterdata>()
+    private fun generateFilterList(): List<String> {
+        val list = ArrayList<String>()
 
-        val filter1 = Filterdata("Main Ingredient")
-        val filter2 = Filterdata("Meal Type")
-        val filter3 = Filterdata("Rating")
-        val filter4 = Filterdata("Difficulty")
-        val filter5 = Filterdata("Time")
-
-
-        list += filter4
-        list += filter2
-        list += filter3
-        list += filter5
-        list += filter1
+        list += "Difficulty"
+        list += "Meal Type"
+        list += "Rating"
+        list += "Time"
+        list += "Main Ingredient"
 
         return list
     }
@@ -108,8 +106,6 @@ class RecipeFragment : Fragment(R.layout.recipefragment){
     private fun readFilterData(): Array<Array<String>>{
         var filterList: Array<Array<String>> = emptyArray()
         val filter: MutableList<String> = mutableListOf()
-
-
 
         var set = true
         val filenames = arrayOf("difficulty.txt","mealtype.txt","rating.txt","time.txt")
@@ -158,38 +154,24 @@ class RecipeFragment : Fragment(R.layout.recipefragment){
     }
 
     //function that stores which filter options have been selected
-    private fun onFilterItemClick(content: Array<String>, name: String) {
-        val list: BooleanArray = when(name){
-            "Difficulty" -> diffArray
-            "Meal Type"  -> typeArray
-            "Rating" -> rateArray
-            "Time" -> timeArray
-            else -> ingreArray
-        }
-        FilterDialogsFragment(content, name, list).show(childFragmentManager, "FilterDialogFragment")
-    }
+    private fun onFilterItemClick(content: Array<FilterItemdata>, name: String) {
 
-    //temp storage for the arrays that hold which filters have been checked
-    //todo: Replace with database
-    private var diffArray = BooleanArray(4)
-    private var timeArray = BooleanArray(4)
-    private var rateArray = BooleanArray(5)
-    private var ingreArray = BooleanArray(96)
-    private var typeArray = BooleanArray(7)
+        val dbh = DatabaseHelper(requireActivity())
 
+        val list = dbh.getUserFilters("Steve", name)
 
-    //runs when the positive button is clicked in the filter dialog fragment
-    fun onDialogPositiveClick(selectedItems: BooleanArray, name: String) {
-        println("listener went to Fragment")
-        when(name){
-            "Difficulty" -> diffArray = selectedItems
-            "Meal Type"  -> typeArray = selectedItems
-            "Rating" -> rateArray = selectedItems
-            "Time" -> timeArray = selectedItems
-            else -> ingreArray = selectedItems
+        var feed: Array<String> = emptyArray()
+        var selectedItems = booleanArrayOf()
+
+        for(i in content){
+            feed += i.title
+            selectedItems += list.contains(i.title)
+
         }
 
+        FilterDialogsFragment(feed, name, selectedItems, list).show(childFragmentManager, "FilterDialogFragment")
     }
+
 
 
 }
