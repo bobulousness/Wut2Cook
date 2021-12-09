@@ -66,8 +66,7 @@ class DatabaseHelper(context: Context)
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
-        p0?.execSQL("DROP TABLE $UFTable")
-        p0?.execSQL("CREATE TABLE $UFTable ($UID INTEGER, $FName TEXT, $FType TEXT)")
+
     }
 
     fun addUser( name: String, email: String, pass: String ) {

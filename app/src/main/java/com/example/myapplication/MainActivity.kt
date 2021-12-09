@@ -12,18 +12,21 @@ class MainActivity : AppCompatActivity(){
     //starts the program then loads up the login page
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.w2cprelogin)
+        //setContentView(R.layout.w2cprelogin)
 
         val dbh = DatabaseHelper(this)
 
         dbh.fillIngredients(this)
         dbh.fillFilters(this)
 
-        /*binding = LoginBinding.inflate(layoutInflater)
+
+
+        binding = LoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         //sets login button to open the toolbar activity when clicked
         binding.loginButton.setOnClickListener{
             startActivity(Intent(this, ToolbarActivity::class.java))
-        }*/
+        }
     }
 }

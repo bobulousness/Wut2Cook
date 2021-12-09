@@ -57,9 +57,6 @@ class ToolbarActivity : AppCompatActivity(), FilterDialogsFragment.FilterDialogL
         selectedItems: Array<String>,
         name: String
     ) {
-        for (i in selectedItems){
-            println(i)
-        }
         dbh.updateUserFilters(selectedItems, "Steve", name)
     }
 
