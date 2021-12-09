@@ -1,10 +1,11 @@
+drop database if exists wut2cookusers;
 create database wut2cookusers;
 use wut2cookusers;
 create table register (
 	Name varchar(255) not null,
-    password varchar(255) not null,
-    gender enum ('male','female','other'),
-    email varchar(255) not null
+	email varchar(255) not null,
+	password varchar(255) not null,
+    	gender enum ('male','female','other')
 );
 
 create table filters (
@@ -17,7 +18,7 @@ create table register_filter(
 
 );
 
-insert into register values('John Doe', 'cooky@123', 'male', 'johndoe@gmail.com');
+insert into register values('John Doe', 'johndoe@gmail.com', 'cooky@123', 'male');
 
 select *
 from register;
