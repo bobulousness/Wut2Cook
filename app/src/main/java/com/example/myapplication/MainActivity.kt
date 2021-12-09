@@ -7,19 +7,10 @@ import com.example.myapplication.databinding.LoginBinding
 
 class MainActivity : AppCompatActivity(){
 
-    private lateinit var binding: LoginBinding
-
-    //starts the program then loads up the login page
+    //starts the program to a initial page without a being logged in
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-        binding = LoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        //sets login button to open the toolbar activity when clicked
-        binding.loginButton.setOnClickListener{
-            startActivity(Intent(this, ToolbarActivity::class.java))
-        }
+        setContentView(R.layout.w2cprelogin)
     }
+
 }
