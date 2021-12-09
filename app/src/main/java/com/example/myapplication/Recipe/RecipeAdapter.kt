@@ -12,8 +12,10 @@ import com.example.myapplication.R
 //this is the adapter for the vertical recipe recycler view
 class RecipeAdapter(
     private val recipeList: List<Recipedata>,
-    private val onItemClicked: (position: Int) -> Unit) : RecyclerView.Adapter<RecipeAdapter.ViewHolder>()
+    private val onItemClicked: (position: Int) -> Unit
+) : RecyclerView.Adapter<RecipeAdapter.ViewHolder>()
 {
+
     class ViewHolder(
         view: View,
         private val onItemClicked: (position: Int) -> Unit
@@ -41,7 +43,10 @@ class RecipeAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = recipeList[position]
 
+        //changes the recipe image
         holder.imageView.setImageResource(currentItem.imageResource)
+
+        //changes the recipe title
         holder.titleView.text = currentItem.title
     }
 

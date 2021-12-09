@@ -1,4 +1,4 @@
-package com.example.myapplication.pantry
+package com.example.myapplication.Pantry
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.PantryfragmentBinding
 import java.io.BufferedReader
+import android.widget.CheckBox
 
 //this fragment hosts the page where users input ingredients
 class PantryFragment : Fragment(R.layout.pantryfragment) {
@@ -17,14 +18,14 @@ class PantryFragment : Fragment(R.layout.pantryfragment) {
 
     private val binding get() = _binding!!
 
+    var pantryList: List<Pantrydata> = emptyList()
 
+    var templist = List<Pantrydata>(96){ Pantrydata("",false) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-
 
 
         _binding = PantryfragmentBinding.inflate(inflater, container, false)
@@ -34,36 +35,35 @@ class PantryFragment : Fragment(R.layout.pantryfragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val list = generatePantryList()
+        pantryList = generatePantryList()
 
         binding.PantryRecyclerView.apply {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            adapter = PantryAdapter(list)
+            adapter = PantryAdapter(pantryList)
         }
     }
 
     private fun generatePantryList(): List<Pantrydata> {
 
-        val inputStream: BufferedReader = requireActivity().assets.open("ingredients.txt").bufferedReader()
+        val inputStream: BufferedReader =
+            requireActivity().assets.open("ingredients.txt").bufferedReader()
         val lineList = mutableListOf<String>()
 
         var set = false
-        val meatList = ArrayList<Pantrydata>()
+        val list = ArrayList<Pantrydata>()
+        var i = 0
 
 
-        inputStream.useLines { lines -> lines.forEach { lineList.add(it)} }
-        lineList.forEach{
-            /*if(it == "-"){
-                set = true
+        inputStream.useLines { lines -> lines.forEach { lineList.add(it) } }
+        lineList.forEach {
+            when {
+                it == "-" -> {set = true; i++}
+                set -> {set = false; i++}
+                else -> {list += Pantrydata(it, templist[i].on);  i++}
             }
-            if (set == true){
-                if (it == "meat")
-            }*/
-
-            meatList += Pantrydata(it,false)
         }
 
-        return meatList
+        return list
     }
 
     override fun onDestroyView() {
