@@ -1,15 +1,12 @@
 package com.example.myapplication
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 
-
-class MainActivity : AppCompatActivity(){
-
-    //starts the program to a initial page without a being logged in
+class RegisterActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.w2cprelogin)
+        setContentView(R.layout.register)
     }
-
 }

@@ -12,4 +12,6 @@ class LoginPageActivity :AppCompatActivity(){
         setContentView(R.layout.login)
     }
 
+
+
 }
