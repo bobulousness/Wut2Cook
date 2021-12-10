@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper
 import com.example.myapplication.Pantry.Pantrydata
 import com.example.myapplication.Recipe.FilterItemdata
 import java.io.BufferedReader
-import java.lang.Exception
 
 class DatabaseHelper(context: Context)
     : SQLiteOpenHelper(context, "user.db", null, 10) {
@@ -70,7 +69,7 @@ class DatabaseHelper(context: Context)
     }
 
     fun addUser( name: String, email: String, pass: String ) {
-        val db: SQLiteDatabase  = this.writableDatabase
+        val db: SQLiteDatabase  = writableDatabase
 
         val cv = ContentValues()
 
@@ -82,6 +81,21 @@ class DatabaseHelper(context: Context)
 
         db.close()
     }
+    fun verify(email: String, pass: String):Boolean{
+        val db: SQLiteDatabase = writableDatabase
+        val values = "select * from UTable where UEmail = $email and UPass = $pass"
+
+        val check = db.rawQuery(values,null)
+
+        if (check.count<=0){
+            check.close()
+            return false
+        }
+        check.close()
+        return true
+    }
+
+
 
     fun fillIngredients(context: Context){
         val db: SQLiteDatabase  = this.writableDatabase

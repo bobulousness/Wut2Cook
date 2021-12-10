@@ -25,6 +25,7 @@
         <activity android:name=".LoginPageActivity" />
         <activity android:name=".ToolbarActivity" />
         <activity android:name=".IndividualActivity"/>
+        <activity android:name=".RegisterActivity"/>
     </application>
 
 

@@ -41,5 +41,14 @@
             android:textAllCaps="false"
             />
     </LinearLayout>
-
+    <include
+        android:id="@+id/register_layout"
+        android:visibility="gone"
+        layout="@layout/register"
+        />
+    <include
+        android:id="@+id/login_layout"
+        android:visibility="gone"
+        layout="@layout/login"
+        />
 </RelativeLayout>
