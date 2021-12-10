@@ -81,17 +81,22 @@ class DatabaseHelper(context: Context)
 
         db.close()
     }
-    fun verify(email: String, pass: String):Boolean{
-        val db: SQLiteDatabase = writableDatabase
-        val values = "select * from UTable where UEmail = $email and UPass = $pass"
 
-        val check = db.rawQuery(values,null)
+    fun verify(email: String, pass: String): Boolean {
+        val db: SQLiteDatabase = readableDatabase
+        val values = "select * from $UTable where $UEmail = '$email' and $UPass = '$pass'"
+
+        val check: Cursor  = db.rawQuery(values,null)
+
+        println(check.count)
 
         if (check.count<=0){
             check.close()
             return false
         }
+
         check.close()
+        db.close()
         return true
     }
 

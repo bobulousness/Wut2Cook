@@ -10,10 +10,16 @@ import com.example.myapplication.databinding.LoginBinding
 
 //login activity processes credentials and takes user to
 class LoginPageActivity :AppCompatActivity(){
+
+
     private lateinit var log: LoginBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.login)
+
+        log = LoginBinding.inflate(layoutInflater)
+        setContentView(log.root)
 
         val dbh = DatabaseHelper(this)
         val email = log.emailInput
